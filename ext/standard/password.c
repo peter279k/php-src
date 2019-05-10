@@ -731,6 +731,7 @@ PHP_FUNCTION(password_hash)
 			case 0:
 			case 1:
 			php_error_docref(NULL, E_NOTICE, "PASSWORD_BCRYPT truncates password longer than 72 bytes");
+			RETURN_NULL();
 		}
 	}
 
