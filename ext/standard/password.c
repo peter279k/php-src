@@ -726,6 +726,14 @@ PHP_FUNCTION(password_hash)
 		RETURN_NULL();
 	}
 
+	if (ZSTR_LEN(password) > 72 && Z_TYPE_P(zalgo) == IS_LONG) {
+		switch (Z_LVAL_P(zalgo)) {
+			case 0:
+			case 1:
+			php_error_docref(NULL, E_NOTICE, "PASSWORD_BCRYPT truncates password longer than 72 bytes");
+		}
+	}
+
 	digest = algo->hash(password, options);
 	if (!digest) {
 		/* algo->hash should have raised an error. */

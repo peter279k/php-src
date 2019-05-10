@@ -16,6 +16,8 @@ var_dump(password_hash("foo", PASSWORD_BCRYPT, array("salt" => 123)));
 
 var_dump(password_hash("foo", PASSWORD_BCRYPT, array("cost" => "foo")));
 
+var_dump(password_hash("12345678901234567890123456789012345678901234567890123456789012345678901234567890", PASSWORD_BCRYPT));
+
 ?>
 --EXPECTF--
 Warning: password_hash(): Invalid bcrypt cost parameter specified: 3 in %s on line %d
@@ -41,3 +43,5 @@ NULL
 
 Warning: password_hash(): Invalid bcrypt cost parameter specified: 0 in %s on line %d
 NULL
+
+Notice: password_hash(): PASSWORD_BCRYPT truncates password longer than 72 bytes in %s on line %d
